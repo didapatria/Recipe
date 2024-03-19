@@ -3,9 +3,10 @@ import ListIngredientsComponent from "@/components/ListIngredients";
 
 export default function Home() {
   return (
-    <div className="flex">
-      <ListIngredientsComponent />
-      <FormRecipeComponent />
-    </div>
+  
+      <div className="flex space-x-4">
+        <ListIngredientsComponent />
+        <FormRecipeComponent />
+      </div>
   );
 }

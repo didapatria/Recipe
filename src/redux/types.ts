@@ -13,7 +13,12 @@ type IngredientState = {
   done: {
     [id: string]: boolean;
   };
-  button: boolean;
+  buttonIngredient: {
+    [id: string]: boolean;
+  };
+  inputIngredient: {
+    [id: string]: boolean;
+  };
 };
 type Step = {
   id: string;
@@ -21,7 +26,13 @@ type Step = {
 };
 type StepState = {
   steps: Step[];
-  button: boolean;
+  description: string;
+  buttonStep: {
+    [id: string]: boolean;
+  };
+  inputStep: {
+    [id: string]: boolean;
+  };
 };
 
 export type { Ingredient, IngredientState, Step, StepState };

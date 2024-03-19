@@ -1,31 +1,49 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { StepState } from '@/redux/types';
+import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
+import { Step, StepState } from '@/redux/types';
 
 const initialState: StepState = {
   steps: [],
-  button: false,
+  description: '',
+  buttonStep: {},
+  inputStep: {},
 };
 
 const stepsSlice = createSlice({
   name: 'steps',
   initialState,
   reducers: {
-    addStep: () => {
+    addStep: (state, action: PayloadAction<Step>) => {
+      const id = nanoid()
+      state.steps.push({
+        ...action.payload,
+        id,
+      });
+    },
+    descriptionStep: (state, action: PayloadAction<string>) => {
+      state.description = action.payload;
+    },
+    showButtonStep: () => {
+      
+    },
+    showInputStep: () => {
+      
+    },
+    updateStep: () => {
       
     },
     removeStep: () => {
       
     },
-    updateStep: () => {
-      
-    }
   },
 });
 
 export const {
   addStep,
-  removeStep,
+  descriptionStep,
+  showButtonStep,
+  showInputStep,
   updateStep,
+  removeStep,
 } = stepsSlice.actions;
 
 export default stepsSlice.reducer;

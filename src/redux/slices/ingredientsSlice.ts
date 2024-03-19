@@ -7,7 +7,8 @@ const initialState: IngredientState = {
   name: '',
   show: {},
   done: {},
-  button: false,
+  buttonIngredient: {},
+  inputIngredient: {},
 };
 
 const ingredientsSlice = createSlice({
@@ -20,22 +21,6 @@ const ingredientsSlice = createSlice({
         ...action.payload,
         id,
       });
-    },
-    removeIngredient: (state, action: PayloadAction<string>) => {
-      state.ingredients = state.ingredients.filter(
-        (ingredient) => ingredient.id !== action.payload
-      );
-      delete state.show[action.payload];
-    },
-    updateIngredient: (state, action: PayloadAction<Ingredient>) => {
-      const { id, quantity, name } = action.payload;
-      const index = state.ingredients.findIndex(
-        (ingredient) => ingredient.id === id
-      );
-      if (index !== -1) {
-        state.ingredients[index].quantity = quantity;
-        state.ingredients[index].name = name;
-      }
     },
     nameIngredient: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
@@ -55,17 +40,42 @@ const ingredientsSlice = createSlice({
       const { id, done } = action.payload;
       state.done[id] = done;
     },
+    showButtonIngredient: (state, action: PayloadAction<{ id: string; buttonIngredient: boolean }>) => {
+      const { id, buttonIngredient } = action.payload;
+      state.buttonIngredient[id] = buttonIngredient;
+    },
+    showInputIngredient: (state, action: PayloadAction<{ id: string; inputIngredient: boolean }>) => {
+      const { id, inputIngredient } = action.payload;
+      state.inputIngredient[id] = inputIngredient;
+    },
+    updateIngredient: (state, action: PayloadAction<Ingredient>) => {
+      const { id, quantity, name } = action.payload;
+      const index = state.ingredients.findIndex(
+        (ingredient) => ingredient.id === id
+      );
+      if (index !== -1) {
+        state.ingredients[index].quantity = quantity;
+        state.ingredients[index].name = name;
+      }
+    },
+    removeIngredient: (state, action: PayloadAction<string>) => {
+      state.ingredients = state.ingredients.filter(
+        (ingredient) => ingredient.id !== action.payload
+      );
+    },
   },
 });
 
 export const {
     addIngredient,
-    removeIngredient,
-    updateIngredient,
     nameIngredient,
     showIngredient,
     quantityIngredient,
     isDone,
+    showButtonIngredient,
+    showInputIngredient,
+    updateIngredient,
+    removeIngredient,
 } = ingredientsSlice.actions;
 
 export default ingredientsSlice.reducer;
